@@ -16,13 +16,34 @@ const client = new Client({
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
-  ]
+  ],
 });
+
+const fs = require('fs');
+const path = require('path');
+
+client.commands = new Map();
+const commandFiles = fs
+  .readdirSync('./commands')
+  .filter((file) => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+  const command = require(`./commands/${file}`);
+  client.commands.set(command.name, command);
+}
+
 
 client.once('ready', () => console.log(`✅ Bot ready: ${client.user.tag}`));
 
-client.on('messageCreate', msg => {
-  if (msg.content === '!ping') msg.reply('pong!');
+client.on('messageCreate', (msg) => {
+  if (!msg.content.startsWith('!') || msg.author.bot) return;
+
+  const args = msg.content.slice(1).split(' ');
+  const commandName = args.shift().toLowerCase();
+
+  const command = client.commands.get(commandName);
+  if (command) {
+    command.execute(msg, args);
+  }
 });
 
-client.login(process.env.DISCORD_TOKEN);

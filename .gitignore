@@ -1,2 +1,3 @@
 # 環境変数ファイルをGitに含めない
 .env
+node_modules/
