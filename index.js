@@ -1,9 +1,17 @@
 require('dotenv').config();
 
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (_, res) => res.send('🦋 butterfly-bot is alive!'));
+app.listen(PORT, () => console.log(`✅ Web server running on ${PORT}`));
+
 const client = require('./config/client');
 const fs     = require('fs');
 const path   = require('path');
 const store  = require('./features/scheduler/services/scheduleStore');
+
 
 // 先頭で client 作成後に追加
 const setupDailyReminder = require('./features/scheduler/jobs/dailyReminder');
@@ -51,5 +59,6 @@ client.on('messageReactionAdd', (reaction, user) => {
   }
 });
 
-client.login(process.env.DISCORD_TOKEN);
-console.log('✅ Bot started (OAuth2 calendar ready)');
+client.login(process.env.DISCORD_TOKEN)
+  .then(() => console.log('✅ Bot logged in & ready'))
+  .catch(console.error);
