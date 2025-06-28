@@ -1,137 +1,90 @@
 # 🦋 butterfly-bot（日本語版）
 
-**Node.js** 製の Discord Bot です。
+**Node.js** 製の Discord Bot です。スプラトゥーンやドラクエ10などのマルチプレイゲーム管理に加え、Google カレンダー連携、Steam セール情報の自動通知などを行います。本 README では導入理由・各種コマンド・Google OAuth2 設定手順をまとめています。
 
 ---
 
 ## 📂 プロジェクト構成
 
-```
+```text
 butterfly-bot/
-├─ commands/          # 個別のコマンドモジュール（ping.jsなど）
-├─ test/              # Jest によるユニットテスト
-├─ index.js           # メインエントリーポイント（Bot起動 + ヘルスチェック）
-├─ .env.example       # 環境変数テンプレート（本番用 .env はGitに含めない）
-├─ .prettierrc        # Prettier の整形ルール
-├─ .prettierignore    # Prettier が無視するファイル一覧
-├─ eslint.config.mjs  # ESLint の設定（Node.js環境指定）
-├─ package.json       # スクリプトや依存関係の定義
-└─ README.md          # ← 本ファイル
+├─ config/                  Discord クライアント初期化
+│   └─ client.js
+├─ services/
+│   └─ google/
+│        ├─ auth.js         # 最初に実行して token.json を生成
+│        ├─ authClient.js   # refresh_token または token.json を読み込む
+│        └─ calendarService.js  # カレンダー操作ラッパー
+├─ features/
+│   └─ scheduler/
+│        └─ commands/
+│             ├─ gadd.js    # 予定追加
+│             └─ glist.js   # 予定一覧
+├─ token.json               # OAuth 認証結果（git ignore）
+├─ .env                     # 認証情報（git ignore）
+├─ index.js                 # Bot エントリポイント
+└─ README.md                # 本ファイル
 ```
 
 ---
 
-## ⚙️ 使用する環境変数
+## ⚙️ 環境変数（.env）
 
-| 名前                    | 用途                            |
-| --------------------- | ----------------------------- |
-| `DISCORD_TOKEN`       | Discord Bot トークン（開発者ポータルから取得） |
-| `GOOGLE_CLIENT_EMAIL` | Google API用サービスアカウントのメールアドレス  |
-| `GOOGLE_PRIVATE_KEY`  | サービスアカウントの秘密鍵（\n はエスケープ）      |
-| `PORT`                | Expressのポート番号（省略時は **8000**）  |
+| 変数名 | 説明 |
+|---------|------|
+| `DISCORD_TOKEN` | Discord Bot トークン |
+| `GOOGLE_CLIENT_ID` | OAuth2 クライアント ID |
+| `GOOGLE_CLIENT_SECRET` | OAuth2 クライアント シークレット |
+| `GOOGLE_REFRESH_TOKEN` | 取得済みリフレッシュトークン（token.json から抽出） |
+| `GOOGLE_CALENDAR_ID` | 予定を追加するカレンダー ID |
 
-`.env.example` を参考に `.env` を作成し、**Gitには含めないよう **\`\`** に記述**してください。
-
----
-
-## 🛠 インストール手順
-
-```bash
-# リポジトリをクローンして移動
-git clone https://github.com/<ユーザー名>/butterfly-bot.git
-cd butterfly-bot
-
-# 必要パッケージのインストール
-npm install
-```
+> `.env` と `token.json` は **必ず Git から除外** してください（`.gitignore`）
 
 ---
 
-## 🚀 npm スクリプト一覧
+## 🚀 主要 npm スクリプト
 
-| コマンド              | 実行内容                 | 説明                |
-| ----------------- | -------------------- | ----------------- |
-| `npm run dev`     | `nodemon index.js`   | 開発中に自動再起動するモード    |
-| `npm start`       | `node index.js`      | 本番起動（Koyeb で使用）   |
-| `npm test`        | `jest`               | Jest によるユニットテスト   |
-| `npm run lint`¹   | `eslint .`           | ESLint による静的解析    |
-| `npm run format`¹ | `prettier . --write` | Prettier によるコード整形 |
+| スクリプト | 内容 |
+|------------|------|
+| `npm start` | `node index.js` 本番起動 |
+| `npm run dev` | `nodemon index.js` 開発モード |
+| `npm run auth` | `node services/google/auth.js` OAuth2 フロー実行 |
 
-¹ 下記のように `package.json` に追加します：
-
-```json
-"scripts": {
-  "start": "node index.js",
-  "dev": "nodemon index.js",
-  "test": "jest",
-  "lint": "eslint .",
-  "format": "prettier . --write"
-}
-```
+> 初回だけ `npm run auth` を実行し、ブラウザで認証して `token.json` を生成します。
 
 ---
 
-## ✨ 導入ツールとその目的
+## 🗂 コマンド一覧（Discord）
 
-| ツール名         | npm パッケージ名               | 導入理由                               |
-| ------------ | ------------------------ | ---------------------------------- |
-| **Prettier** | `prettier`（開発依存）         | コード整形を統一してレビュー効率UP・可読性向上           |
-| **ESLint**   | `eslint` + `@eslint/js`等 | 静的解析。未使用変数や文法ミス検出 (`require`未定義など) |
-| **Jest**     | `jest`（開発依存）             | ユニットテスト。コマンドロジックなどの動作確認に有効         |
-| **nodemon**  | `nodemon`（開発依存）          | 開発中に保存するたびに自動で再起動（効率向上）            |
-
----
-
-## 🗂 コマンド構造
-
-各ファイルは `name`, `description`, `execute()` を持つオブジェクトを `module.exports` で定義します：
-
-```js
-// commands/ping.js
-module.exports = {
-  name: 'ping',
-  description: 'Pingコマンド',
-  execute(msg) {
-    msg.reply('pong!');
-  },
-};
-```
-
-**index.js** では以下のようにコマンドファイルを自動読み込み：
-
-```js
-const fs = require('fs');
-client.commands = new Map();
-fs.readdirSync('./commands')
-  .filter(f => f.endsWith('.js'))
-  .forEach(f => {
-    const cmd = require(`./commands/${f}`);
-    client.commands.set(cmd.name, cmd);
-  });
-```
-
-これによりメイン処理がシンプルになり、新しいコマンド追加も容易です。
+| コマンド | 機能 | 備考 |
+|----------|------|------|
+| `!ping` | Bot 応答テスト | `pong!` を返す |
+| `!recruit` | ゲーム募集メッセージ作成 | リアクションで日程投票 |
+| `!fix` | 募集日程確定＋リマインド設定 | 1 時間前通知 |
+| `!gadd <タイトル>` | Google カレンダーに 1 時間枠で予定を追加 | 今すぐ＋1h |
+| `!glist [日数]` | 直近 *n* 日の予定一覧を Embed 表示 | 既定 7 日 |
 
 ---
 
-## ☁️ Koyeb へのデプロイ手順
+## 🔑 Google OAuth2 設定手順（簡易）
 
-1. Koyeb で **GitHubリポジトリを接続** → *New App* → Gitからデプロイ
-2. 環境変数（`DISCORD_TOKEN`, `GOOGLE_PRIVATE_KEY` 等）を設定
-3. **Scaling は Min=1 / Max=1** にする（重複起動を防ぐ）
-4. `npm start` を実行し、Express のヘルスチェック `/` が正常起動の目印となる
+1. **GCP → 認証情報**で「OAuth 2.0 クライアント ID（デスクトップ）」を発行。
+2. `.env` に `GOOGLE_CLIENT_ID` & `GOOGLE_CLIENT_SECRET` を追加。
+3. `npm run auth` を実行 → ブラウザで認可 → `token.json` と `refresh_token` を取得。
+4. `.env` に `GOOGLE_REFRESH_TOKEN` を貼り付け。（token.json だけでも可）
+5. Google カレンダーの「設定と共有」で **サービスアカウント** or 自分アカウントを編集権限付きで共有。
 
-**main ブランチに push すると自動で再デプロイ**されます。
-
----
-
-## 💡 今後の拡張予定
-
-* スラッシュコマンドの自動登録
-* Discord.js モックを用いた統合テスト
-* GitHub Actions による CI (`npm test && npm run lint`)
-* Docker 対応（他ホスティングやローカル開発向け）
+> Koyeb などのホスティング環境では `.env` の全変数を環境変数タブにそのまま登録すれば動作します。token.json は不要です。
 
 ---
 
-🎮 ゲーム仲間の集いを、もっと楽しく、もっと便利に。
+## ✨ 追加予定・アイデア
+
+- `!gremove` 予定削除、`!gupdate` 予定編集
+- 自動リマインダー機能（30分前 DM / チャンネル通知）
+- `!gsearch <keyword>` で予定検索
+- 月間カレンダー画像出力 (`!gcalendar`) などのビジュアル化
+
+---
+
+🎮 ゲーム仲間の集いを、もっと便利に。
