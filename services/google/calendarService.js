@@ -3,7 +3,8 @@ const { google } = require('googleapis');
 const getAuth = require('./authClient');
 const dayjs = require('dayjs');
 
-const calendar = google.calendar({ version: 'v3', auth: getAuth() });
+const auth = require('./authClient');
+const calendar = google.calendar({ version: 'v3', auth });
 
 module.exports = {
   /** 予定追加はすでに実装済み ↓ */

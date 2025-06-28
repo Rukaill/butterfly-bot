@@ -1,30 +1,31 @@
-// services/google/authClient.js
-require('dotenv').config();
+const { google } = require('googleapis');
 const fs = require('fs');
 const path = require('path');
-const { google } = require('googleapis');
 
-module.exports = function getAuth() {
-  const oAuth2 = new google.auth.OAuth2(
-    process.env.GOOGLE_CLIENT_ID,
-    process.env.GOOGLE_CLIENT_SECRET,
-    'http://localhost'   // 実際のランタイムでは使わない
-  );
+// .env に記載された OAuth2 情報
+const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const REDIRECT_URI = process.env.GOOGLE_REDIRECT_URI;
 
-  // ------- ① token.json 優先 -------
-  const tokenPath = path.join(__dirname, 'token.json');
-  if (fs.existsSync(tokenPath)) {
-    oAuth2.setCredentials(JSON.parse(fs.readFileSync(tokenPath, 'utf8')));
-    return oAuth2;
-  }
+// OAuth2 クライアントを作成
+const oAuth2Client = new google.auth.OAuth2(
+  CLIENT_ID,
+  CLIENT_SECRET,
+  REDIRECT_URI
+);
 
-  // ------- ② .env の refresh_token -------
-  if (process.env.GOOGLE_REFRESH_TOKEN) {
-    oAuth2.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN });
-    return oAuth2;
-  }
+// 方式①：token.json をファイルから読み込む（ローカル開発用）
+const TOKEN_PATH = path.join(__dirname, 'token.json');
 
-  throw new Error(
-    'Google OAuth2 の資格情報が見つかりません。auth.js を実行して token.json を作成するか、GOOGLE_REFRESH_TOKEN を .env に設定してください。'
-  );
-};
+if (fs.existsSync(TOKEN_PATH)) {
+  const token = JSON.parse(fs.readFileSync(TOKEN_PATH, 'utf8'));
+  oAuth2Client.setCredentials(token);
+} else if (process.env.GOOGLE_OAUTH_TOKEN_JSON) {
+  // 方式②：環境変数から読み込む（Koyeb本番用）
+  const token = JSON.parse(process.env.GOOGLE_OAUTH_TOKEN_JSON);
+  oAuth2Client.setCredentials(token);
+} else {
+  console.error('❌ トークン情報が見つかりません');
+}
+
+module.exports = oAuth2Client;
