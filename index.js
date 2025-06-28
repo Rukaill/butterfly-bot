@@ -5,10 +5,23 @@ const fs     = require('fs');
 const path   = require('path');
 const store  = require('./features/scheduler/services/scheduleStore');
 
+// 先頭で client 作成後に追加
+const setupDailyReminder = require('./features/scheduler/jobs/dailyReminder');
+setupDailyReminder(client, '1388260604808003645'); // ← 通知するチャンネルIDを指定
+
 // 既存イベント登録
 require('./features/common/events/ready')(client);
 require('./features/common/events/messageCreate')(client);
 require('./features/scheduler/events/reactionAdd')(client);
+require('./features/common/events/voiceStateUpdate')(client);
+
+client.on('voiceStateUpdate', (oldS, newS) => {
+  console.log('--- voiceStateUpdate fired ---');
+  console.log('Old:', oldS.channelId);
+  console.log('New:', newS.channelId);
+  console.log('User:', newS.member?.user?.tag);
+});
+
 
 // コマンド読み込み
 client.commands = new Map();

@@ -1,6 +1,7 @@
 // features/scheduler/commands/fix.js
 const { CronJob } = require('cron');
 const { EmbedBuilder } = require('discord.js');
+const calendarService = require('../../../services/google/calendarService');
 const ms = require('ms');
 const store = require('../services/scheduleStore');
 const dayjs = require('dayjs');
@@ -95,10 +96,27 @@ module.exports = {
     } else {
       new CronJob(remindAt, remindFn).start();
     }
-  
-
-    // 確定メッセージ
-    msg.channel.send(`🪬 **${dateStr}** で開催決定！ 1 時間前にリマインドします 🪬`);
+    
+    // 🗓 Google カレンダーに予定を登録
+    try {
+      // 日付文字列を ISO へ（スラッシュ & 時刻付き→ YYYY-MM-DDTHH:mm）
+      const parsed = dayjs(dateStr, ['M/D H:mm', 'YYYY/MM/DD HH:mm']).set('year', dayjs().year());
+      const startIso = parsed.toISOString();
+      const endIso   = parsed.add(1, 'hour').toISOString();   
+      const event = await calendarService.createEvent({
+        summary      : schedule.title,
+        description  : `${schedule.description}   (Discord募集: ${msg.author.tag})`,
+        startDateTime: startIso,
+        endDateTime  : endIso,
+      });   
+      msg.channel.send(
+        `🪬 **${dateStr}** で開催決定！ 1 時間前にリマインドします 🪬\n` +
+        `📅 <${event.htmlLink}>`
+      );
+    } catch (err) {
+      console.error('Google カレンダー登録失敗:', err);
+      msg.channel.send(`🪬 **${dateStr}** で開催決定！（カレンダー登録は失敗しました）`);
+    }
   }
 };
 

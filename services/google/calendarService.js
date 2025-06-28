@@ -1,6 +1,7 @@
 // services/google/calendarService.js
 const { google } = require('googleapis');
 const auth = require('./authClient');           // 既存
+const dayjs = require('dayjs');
 const calendar = google.calendar({ version: 'v3', auth });
 
 async function createEvent({ summary, description, startDateTime, endDateTime }) {
@@ -17,6 +18,23 @@ async function createEvent({ summary, description, startDateTime, endDateTime })
   return res.data;         // ★ res.data を返す（htmlLink が入る）
 }
 
-async function listUpcomingEvents(days = 7, max = 10) { /* 既存 */ }
+async function listUpcomingEvents(days = 7, max = 10) {
+  const now = dayjs();
+  const timeMax = now.add(days, 'day').toISOString();
+
+  const res = await calendar.events.list({
+    calendarId: process.env.GOOGLE_CALENDAR_ID,   // ← ID が正しいか？
+    timeMin: now.toISOString(),
+    timeMax,                                      // 予定の上限日時
+    singleEvents: true,
+    orderBy: 'startTime',
+    maxResults: max,
+  });
+
+  /* ★ デバッグ用ログ */
+  console.log('events.list result items =', res.data.items?.length);
+
+  return res.data.items || [];                    // ← 必ず配列を返す
+}
 
 module.exports = { createEvent, listUpcomingEvents };
