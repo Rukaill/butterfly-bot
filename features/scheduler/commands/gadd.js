@@ -1,32 +1,51 @@
 // features/scheduler/commands/gadd.js
-const calendarService = require('../../../services/google/calendarService');
+const { EmbedBuilder } = require('discord.js');
 const dayjs = require('dayjs');
+const calendarService = require('../../../services/google/calendarService');
 
 module.exports = {
-  name       : 'gadd',
-  description: '!gadd <タイトル>  1時間枠で Google カレンダーに追加',
+  name: 'gadd',
+  description: '!gadd <タイトル> <日付> <時刻> 例) !gadd テスト 2025-07-01 10:00',
 
   async execute(msg, args) {
-    if (!args.length) {
-      return msg.reply('使い方: `!gadd <タイトル>`');
+    if (args.length < 3) {
+      return msg.reply('使い方: `!gadd タイトル 2025-07-01 10:00`');
     }
 
-    const title = args.join(' ');
-    const start = dayjs().add(1, 'minute'); // 1分後
-    const end   = start.add(1, 'hour');     // +1時間
+    // 末尾 2 要素 = 日付・時刻、残り = タイトル
+    const time = args.pop();            // '10:00'
+    const date = args.pop();            // '2025-07-01'
+    const summary = args.join(' ');     // 'テスト'
+    const dateTimeStr = `${date}T${time}`; // '2025-07-01T10:00'
+
+    const start = dayjs(dateTimeStr);
+    if (!start.isValid()) {
+      return msg.reply('日時は `YYYY-MM-DD HH:mm` で入力してください。');
+    }
+    const end = start.add(1, 'hour');
 
     try {
-      const link = await calendarService.createEvent({
-        summary      : title,
-        description  : `登録者: ${msg.author.tag}`,
+      const event = await calendarService.createEvent({
+        summary,
+        description: `Discord 追加: ${msg.author.tag}`,
         startDateTime: start.toISOString(),
         endDateTime  : end.toISOString(),
       });
 
-      msg.reply(`📅 Google カレンダーに予定を追加しました!\n${link}`);
-    } catch (err) {
-      console.error(err);
-      msg.reply('❌ 予定の追加に失敗しました。');
+      const link = event.htmlLink || '(リンク取得失敗)';
+      const embed = new EmbedBuilder()
+        .setColor(0x3498db)
+        .setTitle('📅 予定を追加しました')
+        .setDescription(
+          `**${summary}**\n` +
+          `${start.format('MM/DD HH:mm')} 〜 ${end.format('HH:mm')}\n` +
+          `[カレンダーを開く](${link})`
+        );
+
+      await msg.reply({ embeds: [embed] });
+    } catch (e) {
+      console.error('gadd error', e);
+      await msg.reply('❌ Google カレンダーへの登録に失敗しました。');
     }
   },
 };
