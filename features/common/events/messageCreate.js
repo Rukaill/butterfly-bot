@@ -1,9 +1,11 @@
+// features/scheduler/events/reactionAdd.js
 module.exports = (client) => {
-  client.on('messageCreate', (msg) => {
-    if (!msg.content.startsWith('!') || msg.author.bot) return;
-    const args = msg.content.slice(1).split(' ');
-    const name = args.shift().toLowerCase();
-    const command = client.commands.get(name);
-    if (command) command.execute(msg, args);
+  client.on('messageReactionAdd', (reaction, user) => {
+    if (user.bot) return;
+    const nums = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣'];
+    const dateIndex = nums.indexOf(reaction.emoji.name);
+    if (dateIndex === -1) return;
+
+    store.addReaction(reaction.message.id, dateIndex, user.id);
   });
 };
