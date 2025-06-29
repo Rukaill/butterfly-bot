@@ -1,121 +1,800 @@
 [
   {
-    "id": "001",
     "name": "わかばシューター",
     "type": "シューター",
     "sub": "スプラッシュボム",
-    "special": "グレートバリア"
+    "special": "グレートバリア",
+    "image": "https://img.altema.jp/splatoon3/uploads/2022/09/2022y09m12d_1805316114.png"
   },
   {
-    "id": "002",
-    "name": "スプラシューター",
+    "name": "もみじシューター",
     "type": "シューター",
-    "sub": "クイックボム",
-    "special": "ウルトラショット"
+    "sub": "トーピード",
+    "special": "ホップソナー",
+    "image": "https://img.altema.jp/splatoon3/uploads/2022/12/2022y12m01d_1408336347.png"
   },
   {
-    "id": "003",
     "name": "プロモデラーMG",
     "type": "シューター",
-    "sub": "キューバンボム",
-    "special": "サメライド"
+    "sub": "タンサンボム",
+    "special": "サメライド",
+    "image": "https://img.altema.jp/splatoon3/uploads/2022/09/2022y09m12d_1805244835.png"
   },
   {
-    "id": "101",
+    "name": "プロモデラーRG",
+    "type": "シューター",
+    "sub": "スプリンクラー",
+    "special": "ナイスダマ",
+    "image": "https://img.altema.jp/splatoon3/uploads/2022/12/2022y12m01d_1408413638.png"
+  },
+  {
+    "name": "スプラシューター",
+    "type": "シューター",
+    "sub": "キューバンボム",
+    "special": "ウルトラショット",
+    "image": "https://img.altema.jp/splatoon3/uploads/2022/09/2022y09m12d_1805064749.png"
+  },
+  {
+    "name": "スプラシューターコラボ",
+    "type": "シューター",
+    "sub": "スプラッシュボム",
+    "special": "トリプルトルネード",
+    "image": "https://img.altema.jp/splatoon3/uploads/2022/12/2022y12m01d_140830624.png"
+  },
+  {
+    "name": "52ガロン",
+    "type": "シューター",
+    "sub": "スプラッシュシールド",
+    "special": "メガホンレーザー",
+    "image": "https://img.altema.jp/splatoon3/uploads/2022/09/2022y09m12d_1804456888.png"
+  },
+  {
+    "name": "N-ZAP85",
+    "type": "シューター",
+    "sub": "キューバンボム",
+    "special": "エナジースタンド",
+    "image": "https://img.altema.jp/splatoon3/uploads/2022/09/2022y09m12d_1804508237.png"
+  },
+  {
+    "name": "N-ZAP89",
+    "type": "シューター",
+    "sub": "ロボットボム",
+    "special": "デコイチラシ",
+    "image": "https://img.altema.jp/splatoon3/uploads/2023/03/2023y03m01d_123740029.jpg"
+  },
+  {
+    "name": "プライムシューター",
+    "type": "シューター",
+    "sub": "ラインマーカー",
+    "special": "カニタンク",
+    "image": "https://img.altema.jp/splatoon3/uploads/2022/09/2022y09m12d_1805236555.png"
+  },
+  {
+    "name": "プライムシューターコラボ",
+    "type": "シューター",
+    "sub": "キューバンボム",
+    "special": "ナイスダマ",
+    "image": "https://img.altema.jp/splatoon3/uploads/2022/12/2022y12m01d_1408404482.png"
+  },
+  {
+    "name": "96ガロン",
+    "type": "シューター",
+    "sub": "スプリンクラー",
+    "special": "キューインキ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "96ガロンデコ",
+    "type": "シューター",
+    "sub": "スプラッシュシールド",
+    "special": "テイオウイカ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "H3リールガン",
+    "type": "シューター",
+    "sub": "ポイントセンサー",
+    "special": "エナジースタンド",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "H3リールガンD",
+    "type": "シューター",
+    "sub": "スプラッシュシールド",
+    "special": "グレートバリア",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "L3リールガン",
+    "type": "シューター",
+    "sub": "カーリングボム",
+    "special": "カニタンク",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "L3リールガンD",
+    "type": "シューター",
+    "sub": "クイックボム",
+    "special": "ウルトラハンコ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ジェットスイーパー",
+    "type": "シューター",
+    "sub": "ラインマーカー",
+    "special": "キューインキ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ジェットスイーパーカスタム",
+    "type": "シューター",
+    "sub": "ポイズンミスト",
+    "special": "アメフラシ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "シャープマーカー",
+    "type": "シューター",
+    "sub": "クイックボム",
+    "special": "カニタンク",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "シャープマーカーネオ",
+    "type": "シューター",
+    "sub": "キューバンボム",
+    "special": "トリプルトルネード",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ボールドマーカー",
+    "type": "シューター",
+    "sub": "カーリングボム",
+    "special": "ウルトラハンコ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ボールドマーカーネオ",
+    "type": "シューター",
+    "sub": "ジャンプビーコン",
+    "special": "メガホンレーザー",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ボトルガイザー",
+    "type": "シューター",
+    "sub": "スプラッシュシールド",
+    "special": "ウルトラショット",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ボトルガイザーフォイル",
+    "type": "シューター",
+    "sub": "ロボットボム",
+    "special": "スミナガシート",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ヒーローシューター レプリカ",
+    "type": "シューター",
+    "sub": "キューバンボム",
+    "special": "ウルトラショット",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "スペースシューター",
+    "type": "シューター",
+    "sub": "ポイントセンサー",
+    "special": "メガホンレーザー",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "スペースシューターコラボ",
+    "type": "シューター",
+    "sub": "トラップ",
+    "special": "ジェットパック",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
     "name": "スプラローラー",
     "type": "ローラー",
     "sub": "カーリングボム",
-    "special": "グレートバリア"
+    "special": "グレートバリア",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
   },
   {
-    "id": "102",
+    "name": "スプラローラーコラボ",
+    "type": "ローラー",
+    "sub": "ジャンプビーコン",
+    "special": "テイオウイカ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
     "name": "ダイナモローラー",
     "type": "ローラー",
     "sub": "スプリンクラー",
-    "special": "エナジースタンド"
+    "special": "エナジースタンド",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
   },
   {
-    "id": "201",
+    "name": "ダイナモローラーテスラ",
+    "type": "ローラー",
+    "sub": "スプラッシュボム",
+    "special": "デコイチラシ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ヴァリアブルローラー",
+    "type": "ローラー",
+    "sub": "トラップ",
+    "special": "マルチミサイル",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "カーボンローラー",
+    "type": "ローラー",
+    "sub": "ロボットボム",
+    "special": "ショクワンダー",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "カーボンローラーデコ",
+    "type": "ローラー",
+    "sub": "クイックボム",
+    "special": "ウルトラショット",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ワイドローラー",
+    "type": "ローラー",
+    "sub": "スプラッシュシールド",
+    "special": "キューインキ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ワイドローラーコラボ",
+    "type": "ローラー",
+    "sub": "ラインマーカー",
+    "special": "アメフラシ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
     "name": "スプラチャージャー",
     "type": "チャージャー",
     "sub": "スプラッシュボム",
-    "special": "キューインキ"
+    "special": "キューインキ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
   },
   {
-    "id": "202",
+    "name": "スプラスコープ",
+    "type": "チャージャー",
+    "sub": "スプラッシュボム",
+    "special": "キューインキ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "スプラチャージャーコラボ",
+    "type": "チャージャー",
+    "sub": "スプラッシュシールド",
+    "special": "トリプルトルネード",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "スプラスコープコラボ",
+    "type": "チャージャー",
+    "sub": "スプラッシュシールド",
+    "special": "トリプルトルネード",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
     "name": "リッター4K",
     "type": "チャージャー",
     "sub": "トラップ",
-    "special": "ホップソナー"
+    "special": "ホップソナー",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
   },
   {
-    "id": "301",
+    "name": "4Kスコープ",
+    "type": "チャージャー",
+    "sub": "トラップ",
+    "special": "ホップソナー",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "14式竹筒銃・甲",
+    "type": "チャージャー",
+    "sub": "ロボットボム",
+    "special": "メガホンレーザー",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "スクイックリンα",
+    "type": "チャージャー",
+    "sub": "ポイントセンサー",
+    "special": "グレートバリア",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ソイチューバー",
+    "type": "チャージャー",
+    "sub": "トーピード",
+    "special": "マルチミサイル",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ソイチューバーカスタム",
+    "type": "チャージャー",
+    "sub": "タンサンボム",
+    "special": "ウルトラハンコ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "R-PEN/5H",
+    "type": "チャージャー",
+    "sub": "スプリンクラー",
+    "special": "エナジースタンド",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "R-PEN/5B",
+    "type": "チャージャー",
+    "sub": "スプラッシュシールド",
+    "special": "アメフラシ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
     "name": "バケットスロッシャー",
     "type": "スロッシャー",
-    "sub": "ロボットボム",
-    "special": "ショクワンダー"
+    "sub": "スプラッシュボム",
+    "special": "トリプルトルネード",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
   },
   {
-    "id": "302",
+    "name": "バケットスロッシャーデコ",
+    "type": "スロッシャー",
+    "sub": "ラインマーカー",
+    "special": "ショクワンダー",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
     "name": "ヒッセン",
     "type": "スロッシャー",
+    "sub": "ポイズンミスト",
+    "special": "ジェットパック",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ヒッセン・ヒュー",
+    "type": "スロッシャー",
     "sub": "タンサンボム",
-    "special": "ホップソナー"
+    "special": "エナジースタンド",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
   },
   {
-    "id": "401",
-    "name": "ホットブラスター",
-    "type": "ブラスター",
-    "sub": "スプラッシュボム",
-    "special": "サメライド"
+    "name": "エクスプロッシャー",
+    "type": "スロッシャー",
+    "sub": "ポイントセンサー",
+    "special": "アメフラシ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
   },
   {
-    "id": "402",
-    "name": "ラピッドブラスター",
-    "type": "ブラスター",
-    "sub": "トラップ",
-    "special": "マルチミサイル"
+    "name": "オーバーフロッシャー",
+    "type": "スロッシャー",
+    "sub": "スプリンクラー",
+    "special": "アメフラシ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
   },
   {
-    "id": "501",
+    "name": "オーバーフロッシャーデコ",
+    "type": "スロッシャー",
+    "sub": "ラインマーカー",
+    "special": "テイオウイカ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "スクリュースロッシャー",
+    "type": "スロッシャー",
+    "sub": "タンサンボム",
+    "special": "ナイスダマ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "スクリュースロッシャーネオ",
+    "type": "スロッシャー",
+    "sub": "ポイントセンサー",
+    "special": "ウルトラショット",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "モップリン",
+    "type": "スロッシャー",
+    "sub": "キューバンボム",
+    "special": "サメライド",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
     "name": "バレルスピナー",
     "type": "スピナー",
     "sub": "スプリンクラー",
-    "special": "ナイスダマ"
+    "special": "ホップソナー",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
   },
   {
-    "id": "502",
-    "name": "スプラスピナー",
+    "name": "バレルスピナーデコ",
     "type": "スピナー",
     "sub": "ポイントセンサー",
-    "special": "グレートバリア"
+    "special": "テイオウイカ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
   },
   {
-    "id": "601",
+    "name": "ハイドラント",
+    "type": "スピナー",
+    "sub": "ロボットボム",
+    "special": "ナイスダマ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "クーゲルシュライバー",
+    "type": "スピナー",
+    "sub": "タンサンボム",
+    "special": "ジェットパック",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "クーゲルシュライバーヒュー",
+    "type": "スピナー",
+    "sub": "トラップ",
+    "special": "キューインキ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "スプラスピナー",
+    "type": "スピナー",
+    "sub": "クイックボム",
+    "special": "ウルトラハンコ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "スプラスピナーコラボ",
+    "type": "スピナー",
+    "sub": "ポイズンミスト",
+    "special": "グレートバリア",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ノーチラス47",
+    "type": "スピナー",
+    "sub": "ポイントセンサー",
+    "special": "アメフラシ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "イグザミナー",
+    "type": "スピナー",
+    "sub": "カーリングボム",
+    "special": "エナジースタンド",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "スプラマニューバー",
+    "type": "マニューバー",
+    "sub": "キューバンボム",
+    "special": "カニタンク",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "スプラニューバーコラボ",
+    "type": "マニューバー",
+    "sub": "カーリングボム",
+    "special": "スーパーチャクチ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "クアッドホッパーブラック",
+    "type": "マニューバー",
+    "sub": "ロボットボム",
+    "special": "サメライド",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "クアッドホッパーホワイト",
+    "type": "マニューバー",
+    "sub": "スプリンクラー",
+    "special": "ショクワンダー",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ケルビン525",
+    "type": "マニューバー",
+    "sub": "スプラッシュシールド",
+    "special": "ナイスダマ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "スパッタリー",
+    "type": "マニューバー",
+    "sub": "ジャンプビーコン",
+    "special": "エナジースタンド",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "スパッタリーヒュー",
+    "type": "マニューバー",
+    "sub": "トーピード",
+    "special": "サメライド",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "デュアルスイーパー",
+    "type": "マニューバー",
+    "sub": "スプラッシュボム",
+    "special": "ホップソナー",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "デュアルスイーパーカスタム",
+    "type": "マニューバー",
+    "sub": "ジャンプビーコン",
+    "special": "デコイチラシ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "パラシェルター",
+    "type": "シェルター",
+    "sub": "スプリンクラー",
+    "special": "トリプルトルネード",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "パラシェルターソレーラ",
+    "type": "シェルター",
+    "sub": "ロボットボム",
+    "special": "ジェットパック",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "キャンピングシェルター",
+    "type": "シェルター",
+    "sub": "ジャンプビーコン",
+    "special": "キューインキ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "キャンピングシェルターソレーラ",
+    "type": "シェルター",
+    "sub": "トラップ",
+    "special": "ウルトラショット",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "スパイガジェット",
+    "type": "シェルター",
+    "sub": "トラップ",
+    "special": "サメライド",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "スパイガジェットソレーラ",
+    "type": "シェルター",
+    "sub": "トーピード",
+    "special": "スミナガシート",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "S-BLAST92",
+    "type": "ブラスター",
+    "sub": "スプリンクラー",
+    "special": "サメライド",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "S-BLAST91",
+    "type": "ブラスター",
+    "sub": "クイックボム",
+    "special": "ナイスダマ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ノヴァブラスター",
+    "type": "ブラスター",
+    "sub": "スプラッシュボム",
+    "special": "ショクワンダー",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ノヴァブラスターネオ",
+    "type": "ブラスター",
+    "sub": "タンサンボム",
+    "special": "ウルトラハンコ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ホットブラスター",
+    "type": "ブラスター",
+    "sub": "ロボットボム",
+    "special": "グレートバリア",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ホットブラスターカスタム",
+    "type": "ブラスター",
+    "sub": "カーリングボム",
+    "special": "スーパーチャクチ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "Rブラスターエリート",
+    "type": "ブラスター",
+    "sub": "ポイズンミスト",
+    "special": "キューインキ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "Rブラスターエリートデコ",
+    "type": "ブラスター",
+    "sub": "ラインマーカー",
+    "special": "メガホンレーザー",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "クラッシュブラスター",
+    "type": "ブラスター",
+    "sub": "スプラッシュボム",
+    "special": "ウルトラショット",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "クラッシュブラスターネオ",
+    "type": "ブラスター",
+    "sub": "カーリングボム",
+    "special": "デコイチラシ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ラピッドブラスター",
+    "type": "ブラスター",
+    "sub": "トラップ",
+    "special": "トリプルトルネード",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ラピッドブラスターデコ",
+    "type": "ブラスター",
+    "sub": "トーピード",
+    "special": "ジェットパック",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ロングブラスター",
+    "type": "ブラスター",
+    "sub": "キューバンボム",
+    "special": "ホップソナー",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "フィンセント",
+    "type": "フデ",
+    "sub": "カーリングボム",
+    "special": "ホップソナー",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "フィンセントヒュー",
+    "type": "フデ",
+    "sub": "ポイントセンサー",
+    "special": "マルチミサイル",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
     "name": "パブロ",
     "type": "フデ",
-    "sub": "トラップ",
-    "special": "メガホンレーザー5.1ch"
+    "sub": "スプラッシュボム",
+    "special": "メガホンレーザー",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
   },
   {
-    "id": "602",
+    "name": "パブロヒュー",
+    "type": "フデ",
+    "sub": "トラップ",
+    "special": "ウルトラハンコ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
     "name": "ホクサイ",
     "type": "フデ",
-    "sub": "ロボットボム",
-    "special": "ショクワンダー"
+    "sub": "キューバンボム",
+    "special": "ショクワンダー",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
   },
   {
-    "id": "701",
+    "name": "ホクサイヒュー",
+    "type": "フデ",
+    "sub": "ジャンプビーコン",
+    "special": "アメフラシ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "トライストリンガー",
+    "type": "ストリンガー",
+    "sub": "ポイズンミスト",
+    "special": "メガホンレーザー",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "トライストリンガーコラボ",
+    "type": "ストリンガー",
+    "sub": "スプリンクラー",
+    "special": "デコイチラシ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "LACT-450",
+    "type": "ストリンガー",
+    "sub": "カーリングボム",
+    "special": "マルチミサイル",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "LACT-450デコ",
+    "type": "ストリンガー",
+    "sub": "スプラッシュシールド",
+    "special": "サメライド",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
     "name": "ドライブワイパー",
     "type": "ワイパー",
-    "sub": "ラインマーカー",
-    "special": "ウルトラショット"
+    "sub": "トーピード",
+    "special": "ウルトラハンコ",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
   },
   {
-    "id": "702",
+    "name": "ドライブワイパーデコ",
+    "type": "ワイパー",
+    "sub": "ジャンプビーコン",
+    "special": "マルチミサイル",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
     "name": "ジムワイパー",
     "type": "ワイパー",
     "sub": "クイックボム",
-    "special": "ショクワンダー"
+    "special": "ショクワンダー",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ジムワイパーヒュー",
+    "type": "ワイパー",
+    "sub": "ポイズンミスト",
+    "special": "カニタンク",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "シューター系",
+    "type": "ルール別最強ランキング",
+    "sub": "ローラー系",
+    "special": "チャージャー系",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "スピナー系",
+    "type": "ルール別最強ランキング",
+    "sub": "ブラスター系",
+    "special": "フデ系",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "スロッシャー系",
+    "type": "ルール別最強ランキング",
+    "sub": "シェルター系",
+    "special": "マニューバー系",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
+  },
+  {
+    "name": "ストリンガー系",
+    "type": "ルール別最強ランキング",
+    "sub": "ワイパー系",
+    "special": "-",
+    "image": "https://img.altema.jp/common/1x1.trans.gif"
   }
 ]

@@ -1,6 +1,6 @@
 # 🦋 butterfly-bot（日本語版）
 
-**Node.js** 製の Discord Bot です。スプラトゥーンやドラクエ10などのマルチプレイゲーム管理に加え、Google カレンダー連携、Steam セール情報の自動通知などを行います。本 README では導入理由・各種コマンド・Google OAuth2 設定手順をまとめています。
+**Node.js** 製の Discord Bot です。スプラトゥーンやドラクエ10などのマルチプレイゲーム管理に加え、Google カレンダー連携を行います。
 
 ---
 
@@ -16,10 +16,21 @@ butterfly-bot/
 │        ├─ authClient.js   # refresh_token または token.json を読み込む
 │        └─ calendarService.js  # カレンダー操作ラッパー
 ├─ features/
-│   └─ scheduler/
-│        └─ commands/
-│             ├─ gadd.js    # 予定追加
-│             └─ glist.js   # 予定一覧
+│   ├─ scheduler/           # カレンダー・募集管理
+│   │   └─ commands/
+│   │        ├─ gadd.js     # 予定追加
+│   │        └─ glist.js    # 予定一覧
+│   ├─ splatoon/            # スプラトゥーン系機能
+│   │   ├─ commands/
+│   │   │    ├─ wroll.js    # 武器ガチャ
+│   │   │    ├─ matchstart.js # プラベ開始
+│   │   │    ├─ win.js      # 勝敗記録
+│   │   │    ├─ matchjoin.js # 途中参加
+│   │   │    └─ matchleave.js # 途中退出
+│   └─ common/
+│       └─ commands/
+│            ├─ ping.js     # pong応答
+│            └─ bhelp.js    # ヘルプ表示
 ├─ token.json               # OAuth 認証結果（git ignore）
 ├─ .env                     # 認証情報（git ignore）
 ├─ index.js                 # Bot エントリポイント
@@ -30,13 +41,13 @@ butterfly-bot/
 
 ## ⚙️ 環境変数（.env）
 
-| 変数名 | 説明 |
-|---------|------|
-| `DISCORD_TOKEN` | Discord Bot トークン |
-| `GOOGLE_CLIENT_ID` | OAuth2 クライアント ID |
-| `GOOGLE_CLIENT_SECRET` | OAuth2 クライアント シークレット |
+| 変数名                    | 説明                              |
+| ---------------------- | ------------------------------- |
+| `DISCORD_TOKEN`        | Discord Bot トークン                |
+| `GOOGLE_CLIENT_ID`     | OAuth2 クライアント ID                |
+| `GOOGLE_CLIENT_SECRET` | OAuth2 クライアント シークレット            |
 | `GOOGLE_REFRESH_TOKEN` | 取得済みリフレッシュトークン（token.json から抽出） |
-| `GOOGLE_CALENDAR_ID` | 予定を追加するカレンダー ID |
+| `GOOGLE_CALENDAR_ID`   | 予定を追加するカレンダー ID                 |
 
 > `.env` と `token.json` は **必ず Git から除外** してください（`.gitignore`）
 
@@ -44,10 +55,10 @@ butterfly-bot/
 
 ## 🚀 主要 npm スクリプト
 
-| スクリプト | 内容 |
-|------------|------|
-| `npm start` | `node index.js` 本番起動 |
-| `npm run dev` | `nodemon index.js` 開発モード |
+| スクリプト          | 内容                                          |
+| -------------- | ------------------------------------------- |
+| `npm start`    | `node index.js` 本番起動                        |
+| `npm run dev`  | `nodemon index.js` 開発モード                    |
 | `npm run auth` | `node services/google/auth.js` OAuth2 フロー実行 |
 
 > 初回だけ `npm run auth` を実行し、ブラウザで認証して `token.json` を生成します。
@@ -56,14 +67,31 @@ butterfly-bot/
 
 ## 🗂 コマンド一覧（Discord）
 
-| コマンド | 機能 | 備考 |
-|----------|------|------|
-| `!ping` | Bot 応答テスト | `pong!` を返す |
-| `!recruit` | ゲーム募集メッセージ作成 | リアクションで日程投票 |
-| `!fix` | 募集日程確定＋リマインド設定 | 1 時間前通知 |
-| `!gcleanup` | ゲーム募集記録の全削除 | 
-| `!gadd <タイトル>` | Google カレンダーに 1 時間枠で予定を追加 | 今すぐ＋1h |
-| `!glist [日数]` | 直近 *n* 日の予定一覧を Embed 表示 | 既定 7 日 |
+### **スプラ関連**
+
+| コマンド                | 機能                                     |
+| ------------------- | -------------------------------------- |
+| `!wroll <チャンネルID>`  | 武器をランダムに抽選します（VC参加者から取得）※未指定時は自身のVCを対象 |
+| `!matchstart <勝利数>` | 先取プラベを開始（ランダムチーム＋勝敗管理）                 |
+| `!win`              | 勝敗を記録                                  |
+| `!matchjoin <名前>`   | 試合に途中参加                                |
+| `!matchleave <名前>`  | 試合から途中退出                               |
+
+### **募集機能**
+
+| コマンド                       | 機能                                |
+| -------------------------- | --------------------------------- |
+| `!recruit <タイトル> <候補日...>` | リアクション投票形式で募集メッセージを作成             |
+| `!fix <メッセージID> <番号>`      | 募集日時を確定し、Googleカレンダーに登録（1時間前通知あり） |
+| `!glist [日数]`              | 直近の予定一覧をEmbedで表示（既定：7日）           |
+| `!gcleanup`                | 期限切れの募集・予定を削除                     |
+
+### **その他**
+
+| コマンド     | 機能                 |
+| -------- | ------------------ |
+| `!ping`  | 応答確認用コマンド（pongを返す） |
+| `!bhelp` | 全コマンドのヘルプを表示       |
 
 ---
 
@@ -78,14 +106,3 @@ butterfly-bot/
 > Koyeb などのホスティング環境では `.env` の全変数を環境変数タブにそのまま登録すれば動作します。token.json は不要です。
 
 ---
-
-## ✨ 追加予定・アイデア
-
-- `!gremove` 予定削除、`!gupdate` 予定編集
-- 自動リマインダー機能（30分前 DM / チャンネル通知）
-- `!gsearch <keyword>` で予定検索
-- 月間カレンダー画像出力 (`!gcalendar`) などのビジュアル化
-
----
-
-🎮 ゲーム仲間の集いを、もっと便利に。　　このREADMEファイルを更新してください、コマンドリストも作って、日本語で 
