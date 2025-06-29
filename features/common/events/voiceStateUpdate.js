@@ -41,8 +41,6 @@ module.exports = (client) => {
     const newCh = newState.channel;
     const oldCh = oldState.channel;
 
-    console.log('--- voiceStateUpdate fired ---');
-
     // 対象外VC・移動無しは無視
     if (!newCh || !VC_CONFIG[newCh.id]) return;
     if (oldCh?.id === newCh.id) return;

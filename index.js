@@ -82,6 +82,21 @@ client.on('messageCreate', msg => {
   if (cmd) cmd.execute(msg, args);
 });
 
+client.on('interactionCreate', async interaction => {
+  if (!interaction.isCommand()) return;
+
+  const command = client.commands.get(interaction.commandName);
+  if (!command) return;
+
+  try {
+    await command.execute(interaction);
+  } catch (error) {
+    console.error(error);
+    await interaction.reply({ content: 'コマンド実行時にエラーが発生しました。', ephemeral: true });
+  }
+});
+
+
 /* ====================================================
  * 🚀 起動
  * ==================================================== */
