@@ -4,7 +4,7 @@ module.exports = {
   description: 'すべてのコマンドと使い方を表示します',
   execute(msg) {
     const helpMessage = `
-🦋 **butterfly-bot コマンド一覧**
+  **コマンド一覧**
 
 __スプラ関連__
 • \`!wroll <チャンネルID>\` - 武器をランダムに抽選します（VCから参加者取得）未指定の場合は自分が参加しているVCチャンネル
