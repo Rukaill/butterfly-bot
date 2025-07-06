@@ -69,7 +69,9 @@ client.commands = new Map();
     if (entry.isDirectory()) return loadCommands(full);
     if (entry.name.endsWith('.js')) {
       const cmd = require(full);
-      client.commands.set(cmd.name, cmd);
+      if (cmd && cmd.name && typeof cmd.execute === 'function') {
+        client.commands.set(cmd.name, cmd);
+      }
     }
   });
 })(path.join(__dirname, 'features'));

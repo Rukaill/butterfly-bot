@@ -97,7 +97,7 @@ module.exports = {
       new CronJob(remindAt, remindFn).start();
     }
     
-    // 🗓 Google カレンダーに予定を登録
+    // 🗓 Google カレンダーに予定を登録 & Discordイベント作成
     try {
       // 日付文字列を ISO へ（スラッシュ & 時刻付き→ YYYY-MM-DDTHH:mm）
       const parsed = dayjs(dateStr, ['M/D H:mm', 'YYYY/MM/DD HH:mm']).set('year', dayjs().year());
@@ -109,6 +109,22 @@ module.exports = {
         startDateTime: startIso,
         endDateTime  : endIso,
       });   
+
+      // Discordイベントも作成
+      try {
+        await msg.guild.scheduledEvents.create({
+          name: schedule.title || '予定',
+          scheduledStartTime: startIso,
+          scheduledEndTime: endIso,
+          privacyLevel: 2, // GUILD_ONLY
+          entityType: 3,   // EXTERNAL
+          description: schedule.description || '',
+          entityMetadata: { location: '未定' },
+        });
+      } catch (err) {
+        console.error('Discordイベント作成失敗:', err);
+      }
+
       msg.channel.send(
         `🪬 **${dateStr}** で開催決定！ 1 時間前にリマインドします 🪬\n` +
         `📅 <${event.htmlLink}>`

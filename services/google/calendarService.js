@@ -1,8 +1,22 @@
-// services/google/calendarService.js
+
 const { google } = require('googleapis');
-const auth = require('./authClient');           // 既存
+const auth = require('./authClient');
 const dayjs = require('dayjs');
 const calendar = google.calendar({ version: 'v3', auth });
+
+/**
+ * 指定期間のGoogleカレンダーイベントを取得
+ * @param {Object} options - Google Calendar API list params
+ * @returns {Promise<Array>} イベント配列
+ */
+async function listEvents(options = {}) {
+  const calendarId = process.env.GOOGLE_CALENDAR_ID;
+  const res = await calendar.events.list({
+    calendarId,
+    ...options,
+  });
+  return res.data.items || [];
+}
 
 async function createEvent({ summary, description, startDateTime, endDateTime }) {
   const res = await calendar.events.insert({
@@ -37,4 +51,4 @@ async function listUpcomingEvents(days = 7, max = 10) {
   return res.data.items || [];                    // ← 必ず配列を返す
 }
 
-module.exports = { createEvent, listUpcomingEvents };
+module.exports = { createEvent, listUpcomingEvents, listEvents };

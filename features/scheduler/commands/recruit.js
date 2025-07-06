@@ -8,17 +8,55 @@ module.exports = {
   name: 'recruit',
 
   async execute(msg, args) {
-    // 入力チェック
-    if (args.length < 4) {
-      return msg.reply('入力形式が正しくありません。\n`!recruit @here タイトル 本文 日付,日付` の形式で入力してください');
+    // 柔軟な引数解釈: !recruit [@here] タイトル [本文] 日付1 日付2 ...
+    if (args.length < 2) {
+      return msg.reply('入力形式が正しくありません。\n`!recruit タイトル 日付1 日付2 ...` の形式で入力してください');
     }
 
-    // 入力値の分解
-    const mention = args[0];
-    const title = args[1];
-    const description = args[2];
-    const rawDateStr = args.slice(3).join(' ');
-    const rawDates = rawDateStr.split(',').map(d => d.trim());
+    let mention = '';
+    let title = '';
+    let description = '';
+    let dateArgs = [];
+
+    // mentionがあれば最初に
+    if (args[0].startsWith('<@') || args[0] === '@here' || args[0] === '@everyone') {
+      mention = args[0];
+      title = args[1];
+      // 本文がある場合: !recruit @here タイトル 本文 日付1 日付2 ...
+      if (args.length > 3 && !args[2].match(/\d{1,2}\/\d{1,2}/) && !args[2].match(/\d{1,2}:\d{2}/)) {
+        description = args[2];
+        dateArgs = args.slice(3);
+      } else {
+        description = '';
+        dateArgs = args.slice(2);
+      }
+    } else {
+      title = args[0];
+      // 本文がある場合: !recruit タイトル 本文 日付1 日付2 ...
+      if (args.length > 2 && !args[1].match(/\d{1,2}\/\d{1,2}/) && !args[1].match(/\d{1,2}:\d{2}/)) {
+        description = args[1];
+        dateArgs = args.slice(2);
+      } else {
+        description = '';
+        dateArgs = args.slice(1);
+      }
+    }
+
+    // カンマ区切りも許容、日付・時刻のペアをまとめて抽出
+    const rawDates = [];
+    let buf = [];
+    for (const arg of dateArgs) {
+      buf.push(arg);
+      // 日付+時刻のペアが揃ったら1つの文字列に
+      if (buf.length === 2 && buf[0].match(/\d{1,2}\/\d{1,2}/) && buf[1].match(/\d{1,2}:\d{2}/)) {
+        rawDates.push(buf.join(' '));
+        buf = [];
+      }
+    }
+    // 余りがあれば単体日付として追加
+    if (buf.length === 1 && buf[0].match(/\d{1,2}\/\d{1,2}/)) {
+      rawDates.push(buf[0]);
+    }
 
     const emojis = ['🇦', '🇧', '🇨', '🇩', '🇪'];
 
